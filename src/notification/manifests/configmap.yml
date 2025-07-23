@@ -5,6 +5,6 @@ metadata:
 data:
   MP3_QUEUE: "mp3"
   VIDEO_QUEUE: "video"
-  SENDER_ADDRESS: "mydammy@gmail.com"
+  SENDER_ADDRESS: "mydummy@gmail.com"
   SMTP_SERVER: "smtp.google.com"
   SMTP_PORT: 587
