@@ -1,0 +1,17 @@
+[project]
+name = "auth"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flask>=3.1.1",
+    "flask-mysqldb>=2.0.0",
+    "pyjwt>=2.10.1",
+    "uvicorn>=0.35.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.1",
+]

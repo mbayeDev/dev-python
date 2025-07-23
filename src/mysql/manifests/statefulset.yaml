@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+spec:
+  serviceName: mysql
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+      app.kubernetes.io/name: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+        app.kubernetes.io/name: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0.42-bookworm
+          ports:
+            - name: mysql
+              protocol: TCP
+              containerPort: 3306
+          resources:
+            requests:
+              memory: 50Mi
+              cpu: 50m
+            limits:
+              memory: 500Mi
+              cpu: 400m
+          envFrom:
+            - configMapRef:
+                name: mysql-configmap
+            - secretRef:
+                name: mysql-secret
+          volumeMounts:
+            - mountPath: "/usr/local/mysql"
+              name: mysql-volume
+      volumes:
+        - name: mysql-volume
+          persistentVolumeClaim:
+            claimName: mysql-pvc

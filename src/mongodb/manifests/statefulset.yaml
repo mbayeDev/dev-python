@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+spec:
+  serviceName: mongodb
+  replicas: 1  # Adjust as per your requirements
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongodb/mongodb-community-server:6.0.22-ubuntu2204
+          ports:
+            - containerPort: 27017
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: mongodb-configmap
+            - secretRef:
+                name: mongodb-secret
+          volumeMounts:
+            - name: mongodb-data
+              mountPath: /data/db
+      volumes:
+        - name: mongodb-data
+          persistentVolumeClaim:
+            claimName: mongodb-pvc
