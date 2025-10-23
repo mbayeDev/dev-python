@@ -2,6 +2,7 @@ import os, datetime
 import jwt
 from flask import Flask, request, jsonify
 from flask_mysqldb import MySQL
+
 server = Flask(__name__)
 mysql = MySQL(server)
 
@@ -11,7 +12,6 @@ server.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD')
 server.config['MYSQL_DB'] = os.environ.get('MYSQL_DB')
 server.config['MYSQL_HOST'] = os.environ.get('MYSQL_HOST')
 server.config['MYSQL_PORT'] = int(os.environ.get('MYSQL_PORT'))
-
 
 def create_jwt_token(userid, username, secret, authz):
 
